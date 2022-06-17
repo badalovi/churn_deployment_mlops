@@ -154,24 +154,6 @@ get_boxdf <- function(test){
     test %>% 
     tibble() %>% 
     select(prediction_proba,prediction_time) %>% 
-    mutate(prediction_time=as.Date(prediction_time),
-           prediction_time=sample(seq(Sys.Date()-20,by='day',length=20),size = nrow(.),replace = TRUE)
-    ) %>% 
-    arrange(prediction_time) %>% 
-    mutate(n=1) %>% 
-    group_by(prediction_time) %>% 
-    summarise(proba=round(mean(prediction_proba),2),
-              n=sum(n))
-  
-  return(df)
-}
-
-
-get_boxdf1 <- function(test){
-  df<-
-    test %>% 
-    tibble() %>% 
-    select(prediction_proba,prediction_time) %>% 
     mutate(prediction_date=as.Date(prediction_time)
     ) #%>% 
     # arrange(prediction_time) %>% 
